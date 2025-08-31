@@ -30,3 +30,27 @@ This Python script is a simple command-line tool that **recursively** converts a
 ### 🖼️ Example
 
 Let's say you have a folder structure like this:
+```
+my_photos/
+├── vacation_pics/
+│   ├── beach.jpeg
+│   └── sunset.jpeg
+└── portraits.jpeg
+ ```
+You can convert all these images and preserve the folder structure with a single command:
+```bash
+# On macOS/Linux
+python3 JpegToPngConverter.py ~/Desktop/my_photos ~/Desktop/converted_images
+
+# On Windows
+python3 JpegToPngConverter.py C:\Users\YourUsername\Desktop\my_photos C:\Users\YourUsername\Desktop\converted_images
+ ```
+
+After running this command, you will have a new folder structure like this on your desktop:
+ ```
+converted_images/
+├── vacation_pics/
+│   ├── beach.png
+│   └── sunset.png
+└── portraits.png
+ ```
