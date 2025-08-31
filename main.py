@@ -14,9 +14,10 @@ def jpeg_to_png():
                 img = Image.open(imageFile)
                 try:
                     dest_path = Path(dest_folder)
-                    dest_path.mkdir(parents=True, exist_ok=True)
-                    img_file_name = imageFile.name.replace('jpeg', 'png')
-                    img.save(dest_path / img_file_name)
+                    if not dest_path.exists():
+                        dest_path.mkdir(parents=True, exist_ok=True)
+                    if dest_path.is_dir():
+                        img.save(dest_path / imageFile.with_suffix('.png').name)
                 except FileExistsError as err:
                     print(err)
                     break
