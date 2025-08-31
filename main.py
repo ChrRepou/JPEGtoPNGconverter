@@ -10,17 +10,21 @@ def jpeg_to_png():
             source_path = Path(source_folder)
             for imageFile in source_path.iterdir():
                 if imageFile.is_dir():
-                    continue
-                img = Image.open(imageFile)
-                try:
-                    dest_path = Path(dest_folder)
-                    if not dest_path.exists():
-                        dest_path.mkdir(parents=True, exist_ok=True)
-                    if dest_path.is_dir():
-                        img.save(dest_path / imageFile.with_suffix('.png').name)
-                except FileExistsError as err:
-                    print(err)
-                    break
+                    sys.argv[1] = str(imageFile)
+                    sys.argv[2] += f'/{imageFile.name}'
+                    jpeg_to_png()
+                else:
+                    img = Image.open(imageFile)
+                    try:
+                        dest_path = Path(dest_folder)
+                        if not dest_path.exists():
+                            dest_path.mkdir(parents=True, exist_ok=True)
+                        if dest_path.is_dir():
+                            if imageFile.suffix in ['.jpg', '.jpeg']:
+                                img.save(dest_path / imageFile.with_suffix('.png').name)
+                    except FileExistsError as err:
+                        print(err)
+                        break
         except FileNotFoundError as err:
             print(err)
     except IndexError:
